@@ -1,0 +1,16 @@
+services:
+  lxconsole:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: lxconsole
+    ports:
+      - 127.0.0.1:44307:5000
+    environment:
+      LXCONSOLE_SECRET_KEY: ${LXCONSOLE_SECRET_KEY}
+    volumes:
+      - ./backups:/opt/lxconsole/backups
+      - ./certs:/opt/lxconsole/certs
+      - ./var/lxconsole-instance:/opt/lxconsole/var/lxconsole-instance
+    extra_hosts:
+      - host.docker.internal:host-gateway
